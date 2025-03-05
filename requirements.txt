@@ -1,0 +1,8 @@
+Flask
+PyPDF2
+langchain
+openai
+numpy
+SQLAlchemy
+psycopg2-binary
+langchain-community

@@ -1,0 +1,29 @@
+version: '3'
+services:
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: fastdoc
+      POSTGRES_PASSWORD: fastdocpassword
+      POSTGRES_DB: fastdocdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - DB_USER=fastdoc
+      - DB_PASSWORD=fastdocpassword
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=fastdocdb
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
